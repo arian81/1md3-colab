@@ -8,14 +8,14 @@ LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 USER root
 
 # Install all OS dependencies for fully functional notebook server
-RUN apt-get update && apt-get install -yq --no-install-recommends \
+RUN apt-get update -y && apt-get install -yq --no-install-recommends \
     build-essential \
     git \
     nano \
     && rm -rf /var/lib/apt/lists/*
 
 # Remove stable version of JupyterLab intalled in base notebook Dockerfile
-RUN conda remove --quiet --yes \
+RUN conda remove --force --quiet --yes \
     'jupyterlab' && \
     conda clean -tipsy && \
     npm cache clean --force && \
